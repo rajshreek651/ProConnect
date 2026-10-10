@@ -1,0 +1,97 @@
+.container {
+    padding: 1.3rem;
+    background: rgb(253, 253, 253);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.backDropContainer {
+    width: 100%;
+    height: 30vh;
+    background: grey;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 20px;
+}
+
+.backDropContainer img{
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30%;
+    left: 8%;
+    text-align: center;
+}
+
+.profileContainer_details {
+    padding-top: 6.6rem;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+.card_profileContainer{
+    display: flex;
+    margin: 0.5rem;
+}
+
+.card_profileContainer > img {
+    width: 3.4rem;
+    height: 3.4rem;
+    object-fit: cover;
+}
+
+.connectBtn{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: rgba(3, 93, 183, 0.905);
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.connectedButton{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    border: 1px solid rgba(3, 93, 183, 0.905);
+    background: rgb(222, 222, 222);
+    outline: none;
+    color: rgba(3, 93, 183, 0.905);;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.workHistoryContainer {
+    display: flex;
+    gap: 1.4rem;
+    padding-top: 1.4rem;
+    width: 100%;
+    flex-wrap: wrap; /* this will make the 'workHistoryCard' get align properly as per the screen sizes */
+}
+
+.workHistoryCard{
+    min-width: fit-content;
+    padding-inline: 2.5rem;
+    padding-block: 1rem;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgb(173, 173, 173);
+}
+
+/* RESPONSIVENESS */
+
+@media only screen and (max-width: 600px) {
+
+    .profileContainer_details {
+        flex-direction: column;
+    }
+
+}

@@ -1,0 +1,135 @@
+# For Demo
+POST  http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Demo",
+    "password": "demo",
+    "email": "demo@gmail.com",
+    "name": "demo"
+}
+
+###
+
+# For Doraemon
+POST  http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Doraemon",
+    "password": "doraemon",
+    "email": "doraemon@gmail.com",
+    "name": "Doraemon"
+}
+
+###
+
+# For Demo
+POST  http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "demo@gmail.com",
+    "password": "demo"
+}
+
+###
+
+# For Sinchan
+POST  http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "sinchan@gmail.com",
+    "password": "sinchan"
+}
+
+###
+
+# POST http://localhost:3000/update_profile_picture HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "profile_picture": "doraemon_profile.webp",
+#     "token": "534b398be276dc3fbaae7893ffb8dc43be1928cd8cfe5789a7d573b3ec74d118"
+# }
+# we can't upload files using 'api.http' , for that we need to use 'HOPPSCOTCH'
+# Through 'HOPPSCOTCH' it can be done as: (i) switch to 'Body' section, (ii) choose Content-Type: multipart/form-data --> then select 'choose file'
+
+
+###
+
+# POST http://localhost:3000/update_profile_backdrop HTTP/1.1
+# Content-Type: application/json
+# {
+#     "profile_picture": "doraemon_profile.webp",
+#     "token": "534b398be276dc3fbaae7893ffb8dc43be1928cd8cfe5789a7d573b3ec74d118"
+# }
+# we can't upload files using 'api.http' , for that we need to use 'HOPPSCOTCH'
+# Through 'HOPPSCOTCH' it can be done as: (i) switch to 'Body' section, (ii) choose Content-Type: multipart/form-data --> then select 'choose file'
+
+
+###
+
+GET http://localhost:3000/get_user_and_profile
+Content-Type: application/json
+
+{
+    "token": "af42e36db554a4afb94f8f2f2c4fe8706e2a6767a98c731a62a0f9fef9e2c3be"
+}
+
+###
+
+# For Sinchan
+POST  http://localhost:3000/update_profile_data HTTP/1.1
+Content-Type: application/json
+
+{
+    "token": "41ebd29529989a017728720a5d81644dea3057e8b3adf3911b22a68675777368",
+    "bio":"Hey ! I am Shin-chan, full name Shinnosuke Nohara, a 5-year-old protagonist of the Japanese manga and anime series Crayon Shin-chan, living in Kasukabe, Saitama, Japan.",
+    "currentPost": "Kindergarten student at Futaba Kindergarten",
+    "pastWork": [
+        {
+            "company": "",
+            "position": "",
+            "years": ""
+        }
+    ],
+    "education": [
+        {
+            "school": "Futaba Kindergarten",
+            "degree": "Kindergarten student",
+            "fieldOfStudy": "All"
+        }
+    ]
+}
+
+###
+
+# For Doraemon
+POST  http://localhost:3000/update_profile_data HTTP/1.1
+Content-Type: application/json
+
+{
+    "token": "3f024df6f0e0b577c62800b2eb044ba0dce1aaf82904eaf6c8a268ba4364c784",
+    "bio":"",
+    "currentPost": "Cat Robo",
+    "pastWork": [
+        {
+            "company": "22ndCent Future Tokyo",
+            "position": "Robot",
+            "years": "25+"
+        }
+    ],
+    "education": [
+        {
+            "school": "Robo School",
+            "degree": "Future Gadgets Pro",
+            "fieldOfStudy": "Gadgets Use"
+        }
+    ]
+}
+
+###
+
+GET http://localhost:3000/user/get_all_users

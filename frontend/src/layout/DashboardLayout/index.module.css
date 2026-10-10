@@ -1,0 +1,111 @@
+.homeContainer {
+    display: flex;
+}
+
+/* '.homeContainer > div:nth-child(odd)' ka '>' represents '.homeContainer' ka jo direct 'div' element hai  */
+.homeContainer > div:nth-child(odd){
+    flex: 0.2;
+    /* here means, 'homeContainer_leftbar' and 'homeContainer_extraContainer' get width 0.2, so yet 40% captured and the rest 60% will be given to 'main feed in the middle of the page' */
+}
+
+.homeContainer > div:nth-child(even){
+    flex: 0.6;
+    /* here means, 60% width will be given to 'main feed' */
+}
+
+.homeContainer_leftBar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 1rem;
+    border-right: 1px solid rgb(222, 222, 222);
+}
+
+.sideBarOption {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    gap: 1.3rem;
+    margin: 1rem auto;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sideBarOption:hover {
+    transform: scale(1.06);
+}
+
+.sideBarOption > svg {
+    height: 1.4em ; 
+    /* 'em' is used w.r.t 'parent'; while 'rem' is used w.r.t 'root' */
+    min-width: fit-content;
+}
+
+.homeContainer_feedContainer{
+    padding-inline: 0.8rem;
+}
+
+.homeContainer_extraContainer{
+    border-left: 1px solid rgb(222, 222, 222);
+    padding-left: 1.2rem;
+}
+
+.userCard{
+    display: flex;
+    gap: 1.2rem;
+    cursor: pointer;
+    padding: 1.3rem;
+    align-items: center;
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+.userCard_image {
+    width: 10%;
+    border-radius: 50%;
+}
+
+/* HANDLING MOBILE VIEW */
+.mobileNavbar {
+    position: fixed; /* It should be 'fixed' at the very bottom of webpage */
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 6vh;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+}
+
+.mobileNavbar svg {
+    height: 2rem;
+    width: 2rem;
+}
+
+
+/* RESPONSIVENESS */
+@media only screen and (max-width: 600px){ /* the styles below are applied till the width is less than or equal to 600px */
+    
+    .homeContainer_extraContainer {
+        display: none;
+    }
+
+    .homeContainer {
+        display: block;
+    }
+
+    .homeContainer_leftBar {
+        display: none;
+    }
+
+    .mobileNavbar {
+        display: flex;
+    }
+
+    .homeContainer_feedContainer {
+        padding-bottom: 8vh;  /* height of 'homeContainer_feedContainer' should be slightly more than as in laptop view, else content was not totally getting displayed */
+    }
+
+}
+

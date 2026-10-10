@@ -1,0 +1,66 @@
+# LINKEDIN CLONE : A SOCIAL MEDIA PLATFORM
+#### THIS PROJECT IS BUILT USUING 'NEXT JS'
+#### ALSO USES REACT-REDUX INSTEAD OF JUST REACT
+
+#### Nextjs common patterns :-
+(1) Search Engine Optimization (SEO)
+(2) Server Side Rendering (SSR) --> used when dynamic platforms like here 'LINKEDIN', where things like comment, post, etc, getting updated
+(3) Static Side Rendering --> Automative Html file made for 'static site'
+(4) api routes --> automatically uses your directory (i.e., just creating index.jsx files in directory and search with '/<directory_name>')
+
+## Project FUGU : A blessing for Web developers, as there's support :- readable stream, zoom video call, OTP, file handling, web authentication, web GPU(Graphic Processing Unit) --> provides web browser at its max capabilities
+
+### Objectives :-
+(1) Project FUGU --> an initiative by Google
+(2) Major features of Linkedin
+(3) PDF Export
+(4) Securing using bcrypt
+(5) File Upload
+(6) Token based Authentication
+(7) Deployment on Render
+
+### Development Tools :-
+(1) Redux Toolkit
+(2) Nextjs --> A framework built over 'REACT JS' --> can get its docs from 'nextjs.org'
+(3) REST Http Client Tool
+(4) Axios
+(5) Render
+
+### Getting started :-
+Think in terms of data before starting in project. Here we will have data from, users, their posts, comments and connections, so make DB models for,
+(1) users
+(2) posts
+(3) connection (when sent a friend request)
+(4) comments
+--> FILE UPLOADS
+
+### Install :-
+(1) npx create-next-app@latest : to create 'frontend' folder with 'Nextjs'
+(2) for 'backend' : npm install bcrypt cors crypto dotenv express mongoose multer nodemon pdf-creator-node pdfkit
+    (i) bcrypt: to encrypt password (for security authorization & authentication)
+    (ii) crypto : for 'TOKEN' generation (for security authorization & authentication)
+    (ii) cors : for network connection etc.
+    (iii) dotenv : for 'process'
+    (iv) express : backend framework
+    (v) mongoose : for connection with MongoDB
+    (vi) multer : for uploading files in their respective destinations
+    (v) nodemon : to automatically 'REFRESH' the webpage
+    (vi) pdf-creator-node pdfkit : for converting 'linkedin profile to resume pdf'
+(3) Insatll 'ES7 + React/Redux/React-Native snippets'
+(4) REST client extension
+(5) file 'api.http' was made to check 'api endpoints'
+
+
+### Converting to PDF --> can learn from 'https://pdfkit.org/
+..... & can use 'canvas' .... converting to png, etc.
+_______________________________________________________________________________________________________________________________
+
+# NOTE:
+# we can't upload files using 'api.http' , for that we need to use 'HOPPSCOTCH'
+# Through 'HOPPSCOTCH' it can be done as: (i) switch to 'Body' section, (ii) choose Content-Type: multipart/form-data --> then select 'choose file'
+
+_______________________________________________________________________________________________________________________
+
+# Search for:- LAWS OF UX (TO MAKE USER GET ATTRACTED TO WEBSITE NOT DUE TO ITS STYLING BUT BY MANIPULATING USER'S MIND )
+# 'zustand' take lower bandwidth as compared to 'react', we can check this in 'BUNDLE PHOBIA'
+_______________________________________________________________________________________________________________________

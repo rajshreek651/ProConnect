@@ -1,0 +1,14 @@
+# Development Flow as seen in the linkedin website :-
+
+(1) Set up the Authentictication and Authorization through 'REGISTER' & 'LOGIN'.
+    Now we entered inside the website.
+(2) User can update their profile_picture --> for this we will use 'multer'
+(3) Setting up the required routes
+(4) Start with Frontend --> Install Nextjs requirements, react-redux, @reduxjs/toolkit, axios
+(5) ake a 'config folder' inside 'src folder', inside 'config folder' include 'index.js' file
+
+_______________________________________________________________________________________________________________________________
+
+# NOTE:
+# we can't upload files using 'api.http' , for that we need to use 'HOPPSCOTCH'
+# Through 'HOPPSCOTCH' it can be done as: (i) switch to 'Body' section, (ii) choose Content-Type: multipart/form-data --> then select 'choose file'

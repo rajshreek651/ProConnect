@@ -1,0 +1,250 @@
+.container {
+    padding: 1.3rem;
+    background: rgb(253, 253, 253);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.backDropContainer {
+    width: 100%;
+    height: 30vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 20px;
+}
+
+.backDropContainer img{
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30%;
+    left: 8%;
+    text-align: center;
+}
+
+.profileContainer {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    margin-left: 40px;
+    margin-top: -70px;
+    border: 5px solid white;
+    background: white;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+.card_profileContainer{
+    display: flex;
+    margin: 0.5rem;
+}
+
+.card_profileContainer > img {
+    width: 3.4rem;
+    height: 3.4rem;
+    object-fit: cover;
+}
+
+/* with this 'backDrop_overlay' will coincide with 'profilePicture'  */
+.backDrop_overlay {
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30%;
+    left: 8%;
+    text-align: center;
+    background: black;
+    /* AFTER THIS */
+    z-index: 4;
+    transition: all 0.3s;
+    cursor: pointer;
+    color: white;
+    opacity: 0.0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backDrop_overlay:hover {
+    background: black;
+    opacity: 0.8;
+}
+
+.updateProfileBtn{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: rgba(3, 93, 183, 0.905);
+    outline: none;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.connectedButton{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    border: 1px solid rgba(3, 93, 183, 0.905);
+    background: rgb(222, 222, 222);
+    outline: none;
+    color: rgba(3, 93, 183, 0.905);;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.workHistoryContainer {
+    display: flex;
+    gap: 1.4rem;
+    padding-top: 1.4rem;
+    width: 100%;
+    flex-wrap: wrap; /* this will make the 'workHistoryCard' get align properly as per the screen sizes */
+}
+
+.workHistoryCard{
+    min-width: fit-content;
+    padding-inline: 2.5rem;
+    padding-block: 1rem;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgb(173, 173, 173);
+}
+
+/* MAKING THE INPUT BOX APPEAR AS IT NOT THE I/P BOX, BUT JUST THE TEXT IS WRITTEN; WHEN IT IS CLICKED WE CAN EDIT THE TEXT */
+.profileContainer_details input {
+    outline: none;
+    border-style: none;
+    padding-inline: 10px;
+    padding-block: 9px;
+    width: fit-content;
+}
+
+/* NAME EDIT */
+.nameEdit {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Bio Edit */
+.profileContainer_details textarea {
+    outline: none;
+    border: none;
+    padding-inline: 10px;
+    padding-block: 9px;
+    font-family: "Poppins" !important;
+    font-size: 1.1rem;
+}
+
+/* Add Work Btn */
+.addWorkButton{
+    border: 1px dotted silver;
+    border-radius: 10px;
+    padding-inline: 1.3rem;
+    padding-block: 1.3rem;
+    background: white;
+    cursor: pointer;
+}
+
+.commentsContainer{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0; /* Done to show that the comment secn. is the overlay */
+    left: 0; /* Done to show that the comment secn. is the overlay */
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.allCommentsContainer{
+    width: 40vw;
+    height: fit-content;
+    background: white;
+    border-radius: 10px;
+    position: relative;
+    padding: 1.4rem; 
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.inputField{
+    padding-inline: 1.3rem;
+    padding-block: 0.8rem;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid silver;
+    width: 100%;
+}
+
+
+/* Backdrop Edit */
+
+.backDrop_edit_label {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.backDrop_edit_label p {
+    margin: 0;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profileContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Profile Edit */
+
+.profile_edit_label {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.profileContainer:hover .profile_edit_label {
+    opacity: 1;
+}
+
+.profile_edit_label p {
+    color: white;
+    font-weight: bold;
+    margin: 0;
+}

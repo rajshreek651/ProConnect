@@ -1,0 +1,33 @@
+'package.json' should contain:-
+
+(1) "type": "module",
+(2) "scripts": {
+        "dev": "nodemon server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+
+______________________________________________________________________________________________________________________________________________________________
+
+npm install : to install all the dependencies
+______________________________________________________________________________________________________________________________________________________________
+
+create '.env' file to store 'mongodb connection string'
+______________________________________________________________________________________________________________________________________________________________
+
+'./backend' should contain main directories like :- 'routes' (has 'posts.routes.js' & 'user.routes.js'), 'models', 'controllers'
+______________________________________________________________________________________________________________________________________________________________
+
+can run 'backend' in Trerminal through 'npm run dev'
+______________________________________________________________________________________________________________________________________________________________
+
+Steps for Backend:-
+(1) make server.js
+(2) then make DB 'models' which will be used by with which the 'controllers' will interact
+(3) then make 'controllers' where manipulation will be done, which will be used by 'routes'
+(4) inject 'middleswares' to routes (wherever required), e.g., for commenting in the post, one should be logged in, so if the user arrives to the 'url/api of comment for the post'  the middleware should first check if the user has logged in, if not logged in then he can't access comment section --> the task is done by middleware
+(5) then make routes will be used by 'server.js'
+______________________________________________________________________________________________________________________________________________________________
+
+
+
+

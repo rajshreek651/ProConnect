@@ -1,0 +1,18 @@
+
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Next.js
+.next/
+
+# Build files
+dist/
+build/
+
+# Uploaded files
+uploads/

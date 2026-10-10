@@ -1,0 +1,5 @@
+# MISSING FUNCTIONALITIES
+
+* For Authentication,
+(1)  check how to distinguish users
+(2) when user is deleted (is actually not deleted from DB in real world then make such a flag in DB structure to make that user, user's profile, their posts, etc. become UNAVAILABLE, OR CANT DISPLAY TO OTHER USERS)

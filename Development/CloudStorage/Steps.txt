@@ -1,0 +1,3 @@
+HOW TO GET FILES UPLOADED IN CLOUDNARY ___________________________________________
+
+(1) From the leftbar_meny select 'Assets' --> Media Libraries --> <Project_name> --> Open

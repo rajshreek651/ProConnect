@@ -1,0 +1,25 @@
+'package.json' should contain:-
+_______________________________________________________________________________________________________________________________________________________
+
+can run 'frontend' in Trerminal through 'npm run dev'
+_______________________________________________________________________________________________________________________________________________________
+
+Install :-
+(1) npm i react-redux @reduxjs/toolkit
+(2) npm i axios
+
+____________________________________________
+
+make a folder named 'config' in the 'src' folder...
+Inside 'config' make a folder named 'redux'...
+
+                STATE ---defines--> UI ---triggers--> ACTIONS ---sent to--> REDUCER ---updates--> STORE ---contains--> STATE ---
+                |______________________________________________________________________________________________________________|
+
+inside 'redux' folder make 3 folders named 'action', 'middleware', 'reducer' and a file named 'store.js'
+_______________________________________________________________________________________________________________________________________________________
+
+# STEPS FOR STATE MANAGEMENT WITH REDUX
+(1) Submit action
+(2) Handle action in it's reducer
+(3) Register 'reducer' in --> 'store.js'
