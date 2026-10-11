@@ -10,7 +10,6 @@
 5. 'NEXT_JS' (made over REACT_JS) for frontend
 6. 'CLOUDINARY' for Cloud storage for image files (jpg, jpeg, png)
 
-***
 
 ## Features Implemented
 - User authentication
@@ -26,14 +25,12 @@
 - RESPONSIVENESS added according to Laptop and Mobile view
 - Instead of using the storing the files locally in '/uploads' folder, we used 'CLOUDINARY' as cloud storage platform
 
-***
 
 ## Future Scope of project
 1. A search bar can be added to search for people (web crawler functionalities)
 2. Added the loading check after all your functions and just before 'return()'
 3. AI implementation
 
-***
 
 ## Project Workflow during Project Development Phase
 
@@ -81,7 +78,6 @@
 37. Adding the 'ADD WORK' Functionality
 38. Deploying LinkedIn Clone "PROCONNECT" in 'Render'
 
-***
 
 ## Challenges occurred while project development
 1. 'get_user_and_profile' route not working sometimes : It is because when when user is deleted from the database by making direct changes in the DB or by some other changes, then it creates problem, coz the local storage has token, but the user of that token is now not found in DB. So for such cases 'REMOVE TOKEN FROM LOCAL STORAGE'. --> SOLVED
