@@ -7,50 +7,219 @@ import ConnectionRequestModel from "../models/connections.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import PDFDocument from "pdfkit";
-import fs from "fs"; // 'fs' means file_system
+import axios from "axios";
+import { cloudinary } from "../cloudConfig.js";
 
-// convert User Data To PDF
+
+// Convert User Data To PDF
 const convertUserDataToPDF = async (userData) => {
-    // Creating new document
-    const doc = new PDFDocument(); // can learn from 'https://pdfkit.org/ 
-    const outputPath = crypto.randomBytes(32).toString("hex") + ".pdf"; // creating a unique filename
-    // we can think that why to use 'crypto'; Instead we can just get the 'username' and then do '<username>.pdf' --> just generate it at once and keep. 
-    // user profile can be updated, and if once generated and kept the PDF, then later we can get the updated profile as the 'file will be OVERWRITTEN'
-    // BUT, we used crypto, coz if we generate using 'username', then 'username' can be known by others, and they may mess with it using, it somewhere else to access, that user's details,... which can 'hamper the security' of that user 
+    try {
+        console.log("STEP 1: Starting PDF generation");
 
-    const stream = fs.createWriteStream(`uploads/${outputPath}`); // storing pdfs also in 'uploads folder'
-    // DON'T USE ABSOLUTE PATH HERE -->  C:\Users\user\OneDrive\Desktop\Projects\MajorProjects\LinkedinClone\uploads --> coz not every programmer has the same path, as ours, so it won't work
-    // USE RELATIVE PATH --> uploads/
+        // Check user data
+        if (!userData) {
+            throw new Error("User profile data is missing");
+        }
 
-    doc.pipe(stream);
+        if (!userData.userId) {
+            throw new Error("User information is missing from profile");
+        }
 
-    doc.image(`uploads/${userData.userId.profilePicture}`, { align: "center", width: 100 });
-    // 'align: "center"' centers it 'horizontally' from the top of the pdf page
-    doc.fontSize(16).text(`Name: ${userData.userId.name}`, { align: "center"});
-    doc.fontSize(14).text(`Username: ${userData.userId.username}`);
-    doc.fontSize(14).text(`Email: ${userData.userId.email}`);
-    doc.fontSize(14).text(`Bio: ${userData.bio}`);
-    doc.fontSize(14).text(`Current Position: ${userData.currentPost}`);
+        console.log("STEP 2: User data validated");
+        console.log("Username:", userData.userId.username);
 
-    doc.fontSize(16).text("Past Work: ");
-    userData.pastWork.forEach((work, index) => {
-        doc.fontSize(14).text(`Company Name: ${work.company}`);
-        doc.fontSize(14).text(`Position: ${work.position}`);
-        doc.fontSize(14).text(`Years: ${work.years}`);
-    });
+        // Download profile picture from Cloudinary
+        let profilePictureBuffer = null;
 
-    doc.fontSize(16).text("Education: ");
-    userData.education.forEach((edu, index) => {
-        doc.fontSize(14).text(`College: ${edu.school}`);
-        doc.fontSize(14).text(`Degree: ${edu.degree}`);
-        doc.fontSize(14).text(`Field of Study: ${edu.fieldOfStudy}`);
-    });
+        const profilePictureUrl = userData.userId.profilePicture;
 
-    doc.end();
+        console.log("STEP 3: Profile picture URL:", profilePictureUrl);
 
-    return outputPath;
+        if (profilePictureUrl?.startsWith("https://")) {
+            try {
+                console.log("STEP 4: Downloading profile picture...");
 
+                const response = await axios.get(profilePictureUrl, {
+                    responseType: "arraybuffer",
+                    timeout: 15000
+                });
+
+                profilePictureBuffer = Buffer.from(response.data);
+
+                console.log(
+                    "STEP 5: Profile picture downloaded successfully"
+                );
+                console.log(
+                    "Profile picture size:",
+                    profilePictureBuffer.length,
+                    "bytes"
+                );
+            } catch (error) {
+                console.error(
+                    "PROFILE PICTURE DOWNLOAD FAILED:",
+                    error.message
+                );
+
+                // Continue generating PDF without the picture
+                profilePictureBuffer = null;
+            }
+        } else {
+            console.log(
+                "STEP 4: No valid HTTPS profile picture URL; skipping image"
+            );
+        }
+
+        // Create PDF in memory
+        console.log("STEP 6: Creating PDF document...");
+
+        const doc = new PDFDocument();
+        const chunks = [];
+
+        const pdfBufferPromise = new Promise((resolve, reject) => {
+            doc.on("data", (chunk) => {
+                chunks.push(chunk);
+            });
+
+            doc.on("end", () => {
+                console.log("STEP 10: PDF document stream ended");
+
+                const buffer = Buffer.concat(chunks);
+
+                console.log(
+                    "STEP 11: PDF buffer created successfully. Size:",
+                    buffer.length,
+                    "bytes"
+                );
+
+                resolve(buffer);
+            });
+
+            doc.on("error", (error) => {
+                console.error(
+                    "PDF DOCUMENT STREAM ERROR:",
+                    error
+                );
+
+                reject(error);
+            });
+        });
+
+        // Add profile picture if available
+        if (profilePictureBuffer) {
+            console.log("STEP 7: Adding profile picture to PDF...");
+
+            doc.image(profilePictureBuffer, {
+                align: "center",
+                width: 100
+            });
+
+            console.log("STEP 7A: Profile picture added successfully");
+        }
+
+        // Add user information
+        console.log("STEP 8: Adding user information to PDF...");
+
+        doc.fontSize(16).text(
+            `Name: ${userData.userId.name || ""}`,
+            { align: "center" }
+        );
+
+        doc.fontSize(14).text(
+            `Username: ${userData.userId.username || ""}`
+        );
+
+        doc.fontSize(14).text(
+            `Email: ${userData.userId.email || ""}`
+        );
+
+        doc.fontSize(14).text(
+            `Bio: ${userData.bio || ""}`
+        );
+
+        doc.fontSize(14).text(
+            `Current Position: ${userData.currentPost || ""}`
+        );
+
+        // Add past work
+        console.log("STEP 8A: Adding past work...");
+
+        const pastWork = userData.pastWork || [];
+
+        console.log("Past work entries:", pastWork.length);
+
+        doc.fontSize(16).text("Past Work:");
+
+        pastWork.forEach((work, index) => {
+            console.log(`Adding past work entry ${index + 1}`);
+
+            doc.fontSize(14).text(
+                `Company Name: ${work.company || ""}`
+            );
+
+            doc.fontSize(14).text(
+                `Position: ${work.position || ""}`
+            );
+
+            doc.fontSize(14).text(
+                `Years: ${work.years || ""}`
+            );
+        });
+
+        // Add education
+        console.log("STEP 8B: Adding education...");
+
+        const education = userData.education || [];
+
+        console.log("Education entries:", education.length);
+
+        doc.fontSize(16).text("Education:");
+
+        education.forEach((edu, index) => {
+            console.log(`Adding education entry ${index + 1}`);
+
+            doc.fontSize(14).text(
+                `College: ${edu.school || ""}`
+            );
+
+            doc.fontSize(14).text(
+                `Degree: ${edu.degree || ""}`
+            );
+
+            doc.fontSize(14).text(
+                `Field of Study: ${edu.fieldOfStudy || ""}`
+            );
+        });
+
+        // Finalize PDF
+        console.log("STEP 9: Finalizing PDF document...");
+
+        doc.end();
+
+        // Wait for PDF generation to complete
+        const pdfBuffer = await pdfBufferPromise;
+
+        if (!pdfBuffer || pdfBuffer.length === 0) {
+            throw new Error("Generated PDF buffer is empty");
+        }
+
+        console.log("STEP 12: PDF generated successfully");
+        console.log("Final PDF size:", pdfBuffer.length, "bytes");
+        console.log("STEP 13: Returning PDF buffer to controller");
+
+        return pdfBuffer;
+
+    } catch (error) {
+        console.error(
+            "CONVERT USER DATA TO PDF FAILED:",
+            error
+        );
+
+        throw error;
+    }
 };
+
+
+
 
 // If 'new user' wants to 'Register'
 export const register = async (req, res) => {
@@ -148,7 +317,7 @@ export const uploadProfilePicture = async (req, res) => {
         // If user doe not exist
         if(!user) return res.status(404).json({message: "User not found !!"});
         // if user exists, then
-        user.profilePicture = req.file.filename; // we don't save binary file in 'MONGO_DB', we are just 'giving' the directory , where the file exists,..., uploading of file is done through 'multer' in the provided destination as here --> 'uploads/'
+        user.profilePicture = req.file.path; // we don't save binary file in 'MONGO_DB', we are just 'giving' the directory , where the file exists,..., uploading of file is done through 'multer' in the provided destination as here --> 'uploads/'
         await user.save();
 
         return res.json({message: "Profile picture updated."});
@@ -171,7 +340,7 @@ export const uploadProfileBackdrop = async (req, res) => {
         const userProfile = await ProfileModel.findOne({userId: user._id});
 
         // if user exists, then
-        userProfile.backdropPicture = req.file.filename; // we don't save binary file in 'MONGO_DB', we are just 'giving' the directory , where the file exists,..., uploading of file is done through 'multer' in the provided destination as here --> 'uploads/'
+        userProfile.backdropPicture = req.file.path; // we don't save binary file in 'MONGO_DB', we are just 'giving' the directory , where the file exists,..., uploading of file is done through 'multer' in the provided destination as here --> 'uploads/'
         await userProfile.save();
 
         return res.json({message: "Profile Backdrop image uploaded.", userProfile: userProfile});
@@ -302,17 +471,40 @@ export const getAllUserProfile = async (req, res) => {
 };
 
 // to download linkedin profile as resume pdf
-export const downloadProfile = async (req, res) => { 
-    try{
-        const user_id = req.query.id; // 'id' taken from url
-        const userProfile = await ProfileModel.findOne({userId: user_id}).populate('userId', 'name username email profilePicture');
+export const downloadProfile = async (req, res) => {
+    try {
+        const user_id = req.query.id;
 
-        let outputPathFetched = await convertUserDataToPDF(userProfile); // 'convertUserDataToPDF' is made above
-        // 'convertUserDataToPDF()' --> returns the 'outputPath'
+        const userProfile = await ProfileModel.findOne({
+            userId: user_id
+        }).populate("userId", "name username email profilePicture");
 
-        return res.json({ message: outputPathFetched });
-    }catch(err){
-        return res.status(500).json({message: err.message});
+        if (!userProfile || !userProfile.userId) {
+            return res.status(404).json({
+                message: "User profile not found"
+            });
+        }
+
+        const pdfBuffer = await convertUserDataToPDF(userProfile);
+
+        // Send PDF directly to the browser
+        res.setHeader("Content-Type", "application/pdf");
+
+        res.setHeader(
+            "Content-Disposition",
+            `attachment; filename="${userProfile.userId.username}-resume.pdf"`
+        );
+
+        return res.status(200).send(pdfBuffer);
+
+    } catch (err) {
+        console.error("Resume download error:", err);
+
+        if (!res.headersSent) {
+            return res.status(500).json({
+                message: err.message
+            });
+        }
     }
 };
 
@@ -344,8 +536,27 @@ export const sendConnectionRequest = async(req, res) => {
         // 'existingRequest' is made to check if once the request is sent from the user, they should not be able to send it again-n-again, until 'request denied'
         // else it will fill up the feed of the user "to whom the response is being sent"
         const existingRequest = await ConnectionRequestModel.findOne({userId: user._id, connectionId: connectionUser._id})
-        if(existingRequest){
-            return res.status(400).json({message: "Request already sent !!"});
+        if (existingRequest) {
+            if (existingRequest.status_accepted === false) {
+                existingRequest.status_accepted = null;
+                await existingRequest.save();
+
+                return res.status(200).json({
+                    message: "Connection request sent again"
+                });
+            }
+
+            if (existingRequest.status_accepted === null) {
+                return res.status(400).json({
+                    message: "Request already sent"
+                });
+            }
+
+            if (existingRequest.status_accepted === true) {
+                return res.status(400).json({
+                    message: "Already connected"
+                });
+            }
         }
 
         // else If the request is not 'already sent', then send it

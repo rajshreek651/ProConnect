@@ -9,9 +9,17 @@ dotenv.config(); // to load the things from '.env' file to 'process'
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.BACKEND_PORT || 3000;
 
+/*
+// During DEVELOPMENT, use cors()
 app.use(cors()); // to avoid 'Exceptions' related to 'origin'
+*/
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+
 app.use(express.json()); // to send requests-responses in json format
 
 // 'Routes' should be after 'express.json()', else ERROR: 'Cannot destructure property...'

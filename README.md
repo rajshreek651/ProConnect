@@ -1,43 +1,39 @@
-
-1. Education History update function --> Not visible --> SOLVED
-
-2. 'user_update' route not happening --> SOLVED
-
-3. 'get_user_and_profile' not working sometimes 
-
-4. update the profileBackrop bg as per users --> SOLVED
-
-5. Remove all the console thing like 'token', user ARRAY, etc. appearing, done during development of project --> SOLVED
-
-6. Remove extra things like 'unused extra styles in css files, index, favicon, next.js already code etc.' --> SOLVED
-
-7. Correct identation and spacing formats --> SOLVED
-
-8. Ask GPT: Do i need to upload '/uploads' folder also in github .... the generated pdfs --> One should not upload '/uploads' in github
-
-**9. USE CLOUDINARY
-
-**9. DEPLOYMENT ON RENDER
-**9. Do not add middleware in github
-**9. update .env
-**9. update .gitignore
-
-10. Make landing page responsive --> SOLVED
-
-11. Connection Requests problem --> SOLVED
-
-12. Delete icon to be shown only to authorized users --> SOLVED
-
-13. Whoever has posted the post their icon should appear insted of the icon of logged-in user --> SOLVED
-
-14. if i did post from 'api.http' from one account then everybody recent work history got updated even if they didn't posted it.
---> RECENT WORK PROBLEM --> SOLVED
-
-
-
 # PROCONNECT - A SOCIAL MEDIA PLATFORM 
 ##### Implemented with LinkedIn Styles
 
+
+### Technologies Used
+1. 'VS CODE' as IDE (Integrated Development Enironment)
+2. 'NODE_JS' as JS Runtime Environment
+3. 'EXPRESS' framework to handle backend
+4. 'MONGO_DB' as DB storage
+5. 'NEXT_JS' (made over REACT_JS) for frontend
+6. 'CLOUDINARY' for Cloud storage for image files (jpg, jpeg, png)
+
+***
+
+## Features Implemented
+- User authentication
+- Profile management
+- Connection requests
+- Accept or Decline a connection request
+- Comment on posts
+- Upload a post
+- Delete a post or comment as an AUTHORIZED USER
+- See posts done by other users
+- Discover people
+- Download resume feature --> It is an instantaneous Resume creator
+- RESPONSIVENESS added according to Laptop and Mobile view
+- Instead of using the storing the files locally in '/uploads' folder, we used 'CLOUDINARY' as cloud storage platform
+
+***
+
+## Future Scope of project
+1. A search bar can be added to search for people (web crawler functionalities)
+2. Added the loading check after all your functions and just before 'return()'
+3. AI implementation
+
+***
 
 ## Project Workflow during Project Development Phase
 
@@ -85,28 +81,26 @@
 37. Adding the 'ADD WORK' Functionality
 38. Deploying LinkedIn Clone "PROCONNECT" in 'Render'
 
-
-## Project Features
-1. It is an instantaneous Resume creator
-2. Added the loading check after all your functions and just before 'return()'
-3. RESPONSIVENESS added according to Laptop and Mobile view
-
-## Can Be Done
-1. Instead of using the storing the files locally in '/uploads' folder, we can use platforms like 'CLOUDINARY'
-2. Add the loading check after all your functions and just before 'return()'
+***
 
 ## Challenges occurred while project development
-
+1. 'get_user_and_profile' route not working sometimes : It is because when when user is deleted from the database by making direct changes in the DB or by some other changes, then it creates problem, coz the local storage has token, but the user of that token is now not found in DB. So for such cases 'REMOVE TOKEN FROM LOCAL STORAGE'. --> SOLVED
+2. When switching between signup and login, clearing up the message generated 'e.g. user does not exits, user registered successfully' --> SOLVED
+3. update the 'profile' & 'profileBackrop bg' as per users --> SOLVED
+4. Delete icon to be shown only to authorized users --> SOLVED
+5. Whoever has posted the post their icon should appear insted of the icon of logged-in user --> SOLVED
+6. Add 'EDIT' button in backDrop image --> SOLVED
+7. Connection Requests problem --> SOLVED
+8. Making the pages responsive --> SOLVED
+9. Update pictures links : since now the images or posts are uploaded on CLOUDINARY, so remove ${BASE_URL} syntax, and just 
+    keep CLOUDINARY LINK as stored in DATABASE --> SOLVED 
+10. Upload 'default images' of 'user and backdrop' in cloudinary, then copy the links for those default pictures in cloudinary, then in 
+    'backend/models/profile.model.js', update with the cloudinary link; and similarly update in 'backend/models/user.model.js' --> SOLVED
+11. Download resume problem --> SOLVED
+12. Remove all the console thing like 'token', user ARRAY, etc. appearing, done during development of project
 
 ## When changes done in Profile model to add ProfileBackdrop picture
-
 1. backed/models/profile.model.js : add section of 'profileBackdrop'
 2. backend/user.controller.js : add func. for 'profileBackdropUpload'
 3. backend/user.routes.js : Add route to update 'profile_backdrop'
 4. frontend/src/pages/profile/index.jsx: (i) Add function to handleUploadBackdrop picture; (ii) Make changes in code to display them
-
-
-
-######
-
-https://meet.google.com/eek-cnux-cdy?hs=197&hs=187&authuser=0&ijlm=1791433959869&adhoc=1

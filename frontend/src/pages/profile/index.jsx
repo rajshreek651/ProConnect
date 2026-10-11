@@ -143,7 +143,7 @@ export default function ProfilePage() {
 
                         {/* ================= BACKDROP ================= */}
                         <div className={styles.backDropContainer}
-                            style={{backgroundImage: `url(${BASE_URL}/${userProfile.backdropPicture})`}}>
+                            style={{backgroundImage: `url(${userProfile.backdropPicture})`}}>
 
                             <label htmlFor="profileBackdropUpload"
                                 className={styles.backDrop_edit_label}>
@@ -160,7 +160,7 @@ export default function ProfilePage() {
 
                         {/* ================= PROFILE ================= */}
                         <div className={styles.profileContainer}>
-                            <img src={`${BASE_URL}/${userProfile.userId.profilePicture}`} alt="profile" />
+                            <img src={userProfile.userId.profilePicture} alt="profile" />
 
                             <label htmlFor="profilePictureUpload" className={styles.profile_edit_label}>
                                 <p>Edit</p>
@@ -192,6 +192,86 @@ export default function ProfilePage() {
                                     </div>
                                 </div>
 
+
+                                <div style={{display: "flex", alignItems: "center", gap: "1.2rem"}}>
+                                
+                                    {/* DOWNLOAD RESUME BUTTON */}
+                                    <div
+                                        onClick={async () => {
+                                            try {
+                                                console.log("STEP 1: Starting resume download...");
+                    
+                                                const response = await clientServer.get(
+                                                    `/user/download_resume?id=${userProfile.userId._id}`,
+                                                    {
+                                                        responseType: "blob"
+                                                    }
+                                                );
+                    
+                                                console.log("STEP 2: PDF received from backend");
+                                                console.log("PDF size:", response.data.size, "bytes");
+                    
+                                                // Create a downloadable PDF blob
+                                                const pdfBlob = new Blob([response.data], {
+                                                    type: "application/pdf"
+                                                });
+                    
+                                                console.log("STEP 3: Creating download URL...");
+                    
+                                                const pdfUrl = window.URL.createObjectURL(pdfBlob);
+                    
+                                                // Create a temporary anchor element
+                                                const link = document.createElement("a");
+                    
+                                                link.href = pdfUrl;
+                                                link.download = `${userProfile.userId.username}-resume.pdf`;
+                    
+                                                document.body.appendChild(link);
+                    
+                                                console.log("STEP 4: Downloading resume...");
+                    
+                                                link.click();
+                    
+                                                // Clean up
+                                                link.remove();
+                                                window.URL.revokeObjectURL(pdfUrl);
+                    
+                                                console.log("STEP 5: Resume download initiated successfully");
+                    
+                                            } catch (error) {
+                                                console.error(
+                                                    "RESUME DOWNLOAD FAILED:",
+                                                    error.response?.data || error.message
+                                                );
+                    
+                                                alert("Failed to download resume. Please try again.");
+                                            }
+                                        }}
+                                        style={{ cursor: "pointer" }}
+                                        title="Download Resume"
+                                    >
+                                        <svg
+                                            style={{ height: "1.2em" }}
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="size-6"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                                            />
+                                        </svg>
+                                        &nbsp;&nbsp;<b><i>Download Resume</i></b>
+                                    </div>
+                
+                                    
+                                </div>
+
+
                                 {/* User Profile */}
                                 <div>
                                     <textarea value={userProfile.bio} onChange={(e) => {
@@ -215,7 +295,7 @@ export default function ProfilePage() {
                                                 <div className={styles.card}>
                                                     <div className={styles.card_profileContainer}>
                                                         {post.media !== "" ?
-                                                            <img src={`${BASE_URL}/${post.media}`} alt="post_media" />
+                                                            <img src={post.media} alt="post_media" />
                                                             :
                                                             <div style={{ width: "3.4rem", height: "3.4rem"}}></div>
                                                         }

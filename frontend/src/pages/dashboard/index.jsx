@@ -60,7 +60,7 @@ export default function Dashboard() {
 
                             {/* To post something from the logged in user */}
                             <div className={styles.createPostContainer}>
-                                <img className={styles.userProfile} src={`${BASE_URL}/${authState.user.userId.profilePicture}`} alt="" />
+                                <img className={styles.userProfile} src={authState.user.userId.profilePicture} alt="" />
 
                                 <textarea onChange={(e) => {
                                         setPostContent(e.target.value)
@@ -95,7 +95,7 @@ export default function Dashboard() {
                                     return(
                                         <div key={post._id} className={styles.singleCard}>
                                             <div className={styles.singleCard_profileContainer}>
-                                                <img className={styles.userProfile} src={`${BASE_URL}/${post.userId.profilePicture}`} />
+                                                <img className={styles.userProfile} src={post.userId.profilePicture} />
 
                                                 <div>
                                                     <div style={{display: "flex", gap: "1.2rem", justifyContent: "space-between", width: "100%"}}>
@@ -120,7 +120,7 @@ export default function Dashboard() {
                                                     {/* If 'post.media' image exists, then only show it else not */}
                                                     {post.media &&
                                                         <div className={styles.singleCard_image}>
-                                                            <img src={`${BASE_URL}/${post.media}`} />
+                                                            <img src={post.media} />
                                                         </div>
                                                     }
 
@@ -204,7 +204,7 @@ export default function Dashboard() {
                                                 return(
                                                     <div className={styles.singleComment} key={comment._id}>
                                                         <div className={styles.singleComment_profileContainer}>
-                                                            <img src={`${BASE_URL}/${comment.userId.profilePicture}`} alt="profilePic" />
+                                                            <img src={comment.userId.profilePicture} alt="profilePic" />
 
                                                             <div>
                                                                 <p style={{fontWeight: "bold", fontSize: "1.2rem"}}>{comment.userId.name}</p>

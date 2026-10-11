@@ -28,7 +28,7 @@ export default function NavBarComponent() {
                 <img onClick={() => {
                   router.push("/profile")
 
-                }} className={styles.userProfile} src={`${BASE_URL}/${authState.user.userId.profilePicture}`} alt="" />
+                }} className={styles.userProfile} src={authState.user.userId.profilePicture} alt="" />
 
                 {/* Logout */}
                 <p onClick={() => {

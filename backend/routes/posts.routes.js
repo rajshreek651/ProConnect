@@ -2,30 +2,10 @@
 
 import { Router } from "express";
 import { activeCheck, createPost, getAllPosts, deletePost, commentOnPost, getAllCommentsOfPost, deleteCommentOfPost, increment_likes} from "../controllers/posts.controller.js";
-import multer from "multer";
+import upload from "../middleware/multer.js";
+
 
 const router = Router();
-
-// for profile_picture uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/') // 'uploads/' folder made by us that we can store in our storage by 'compressing the images' in order to consume 'less bandwidth', but for uploading 'videos or posts' which consumes high bandwidth we have to use other services !!!
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-})
-// Similarly, we can make for video uploads, posts uploads, etc. using 'multer' and giving the 'desired destination name as per the service used'
-
-const upload = multer({storage: storage,
-                       fileFilter: (req, file, cb) => {
-                            if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-                                cb(null, true);
-                            } else {
-                                cb(new Error("Only JPG and PNG images are allowed"));
-                            }
-                        }
-});
 
 router.route('/').get(activeCheck);
 

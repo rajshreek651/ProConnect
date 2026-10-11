@@ -85,7 +85,7 @@ export default function DashboardLayout({children}) {
                     }} className={styles.extraContainer_profile}>
 
                     <div className={styles.userCard}>
-                      <img className={styles.userCard_image} src={`${BASE_URL}/${profile.userId.profilePicture}`} alt="profile" />
+                      <img className={styles.userCard_image} src={profile.userId.profilePicture} alt="profile" />
                         <div>
                           <h3>{profile.userId.name}</h3>
                           <p>@{profile.userId.username}</p>

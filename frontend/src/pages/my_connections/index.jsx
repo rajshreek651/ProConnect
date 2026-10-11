@@ -52,22 +52,36 @@ export default function MyConnectionsPage() {
                 }} className={styles.userCard} key={index}>
                   <div style={{display: "flex", alignItems: "center", gap: "1.2rem", justifyContent: "space-between"}}>
                     <div className={styles.profilePicture}>
-                      <img src={`${BASE_URL}/${user.userId.profilePicture}`} alt="profile" />
+                      <img src={user.userId.profilePicture} alt="profile" />
                     </div>
                     <div className={styles.userInfo}>
                       <h3>{user.userId.name}</h3>
                       <p>@{user.userId.username}</p>
                     </div>
 
-                    <button onClick={(e) =>{
-                      e.stopPropagation();
+                    <div style={{display: "flex", gap: "1rem"}}>
+                      <button onClick={(e) =>{
+                        e.stopPropagation();
+                        dispatch(acceptConnection({
+                            connectionId: user._id,
+                            token: localStorage.getItem("token"),
+                            action: "accept" 
+                          }))
+                        }} className={styles.connectedButton}>
+                        Accept
+                      </button>
 
-                      dispatch(acceptConnection({
-                        connectionId: user._id,
-                        token: localStorage.getItem("token"),
-                        action: "accept" 
-                      }))
-                    }} className={styles.connectedButton}>Accept</button>
+                      <button onClick={(e) =>{
+                        e.stopPropagation();
+                        dispatch(acceptConnection({
+                            connectionId: user._id,
+                            token: localStorage.getItem("token"),
+                            action: "decline" 
+                          }))
+                        }} className={styles.connectedButton}>
+                        Decline
+                      </button>
+                    </div>
 
                   </div>
                 </div>
@@ -85,7 +99,7 @@ export default function MyConnectionsPage() {
                 }} className={styles.userCard} key={user._id}>
                   <div style={{display: "flex", alignItems: "center", gap: "1.2rem", justifyContent: "space-between"}}>
                     <div className={styles.profilePicture}>
-                      <img src={`${BASE_URL}/${user.profilePicture}`} alt="profile" />
+                      <img src={user.profilePicture} alt="profile" />
                     </div>
                     <div className={styles.userInfo}>
                       <h3>{user.name}</h3>

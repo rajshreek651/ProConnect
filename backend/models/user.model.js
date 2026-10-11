@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     }, 
     profilePicture: {
         type: String, 
-        default: 'default.jpg' // a new logged in user will have a 'default profile image'
+        default: 'https://res.cloudinary.com/dlcvngqqg/image/upload/v1791694234/default.png' // a new logged in user will have a 'default profile image'
     },
     createdAt: {
         type: Date,

@@ -3,9 +3,6 @@
 
 import UserModel from "../models/user.model.js";
 import PostModel from "../models/posts.model.js";
-import ProfileModel from "../models/profile.model.js";
-import bcrypt from "bcrypt";
-import crypto from "crypto";
 import CommentModel from "../models/comments.model.js";
 
 
@@ -27,7 +24,7 @@ export const createPost = async (req, res) => {
         const post = new PostModel({
             userId: user._id,
             body: req.body.body,
-            media: req.file != undefined ? req.file.filename : "", // means if a user had not posted anything yet, then instead of 'undefined' we can replace it by 'an empty string' 
+            media: req.file != undefined ? req.file.path : "", // means if a user had not posted anything yet, then instead of 'undefined' we can replace it by 'an empty string' 
             fileType: req.file != undefined ? req.file.mimetype.split("/")[1] : "" // 'req.file.mimetype.split("/")[1]' --> converts 'req.file.mimetype' to list of strings where original string separated by "/" --> and we get actually the fileType at index[1] of the list as done by split
         });
         await post.save();

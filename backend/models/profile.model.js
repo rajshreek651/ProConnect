@@ -39,7 +39,7 @@ const ProfileSchema = new mongoose.Schema({
     },
     backdropPicture: {
         type: String,
-        default: 'default-background-image.png',
+        default: 'https://res.cloudinary.com/dlcvngqqg/image/upload/v1791693589/default-background-image.png',
     },
     bio: {
         type: String,
