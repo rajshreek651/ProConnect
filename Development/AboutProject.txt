@@ -64,3 +64,8 @@ ________________________________________________________________________________
 # Search for:- LAWS OF UX (TO MAKE USER GET ATTRACTED TO WEBSITE NOT DUE TO ITS STYLING BUT BY MANIPULATING USER'S MIND )
 # 'zustand' take lower bandwidth as compared to 'react', we can check this in 'BUNDLE PHOBIA'
 _______________________________________________________________________________________________________________________
+
+### Backend deployed at: https://proconnect-backend-mttj.onrender.com
+### Frontend deployed at: https://proconnect-frontend-k05u.onrender.com
+
+_______________________________________________________________________________________________________________________
