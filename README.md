@@ -1,6 +1,7 @@
 # PROCONNECT - A SOCIAL MEDIA PLATFORM 
 ##### Implemented with LinkedIn Styles
 
+#### Website link: https://proconnect-frontend-k05u.onrender.com
 
 ### Technologies Used
 1. 'VS CODE' as IDE (Integrated Development Enironment)
@@ -9,18 +10,21 @@
 4. 'MONGO_DB' as DB storage
 5. 'NEXT_JS' (made over REACT_JS) for frontend
 6. 'CLOUDINARY' for Cloud storage for image files (jpg, jpeg, png)
+7. 'RENDER' for Deployment
 
 
 ## Features Implemented
-- User authentication
-- Profile management
-- Connection requests
+- User authentication (Register & Login)
+- Logout
+- Profile management (Profile, Edit profile, Upload profile picture)
+- Send connection requests
 - Accept or Decline a connection request
+- View connections
 - Comment on posts
 - Upload a post
 - Delete a post or comment as an AUTHORIZED USER
 - See posts done by other users
-- Discover people
+- Search / Discover users
 - Download resume feature --> It is an instantaneous Resume creator
 - RESPONSIVENESS added according to Laptop and Mobile view
 - Instead of using the storing the files locally in '/uploads' folder, we used 'CLOUDINARY' as cloud storage platform

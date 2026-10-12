@@ -9,7 +9,7 @@ dotenv.config(); // to load the things from '.env' file to 'process'
 
 const app = express();
 
-const PORT = process.env.BACKEND_PORT || 3000;
+const PORT = process.env.BACKEND_PORT || 8080; // if 'process.env.BACKEND_PORT' is not defined, then use 8080
 
 /*
 // During DEVELOPMENT, use cors()
